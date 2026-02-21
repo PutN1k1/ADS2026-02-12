@@ -6,6 +6,8 @@ package by.it.group551002.puteev.lesson01;
  * время расчета должно быть не более 2 секунд
  */
 
+import java.math.BigInteger;
+
 public class FiboC {
 
     private long startTime = System.currentTimeMillis();
@@ -21,10 +23,33 @@ public class FiboC {
         return System.currentTimeMillis() - startTime;
     }
 
+
     long fasterC(long n, int m) {
         //Интуитивно найти решение не всегда просто и
         //возможно потребуется дополнительный поиск информации
-        return -1L;
+        long a = 0;
+        long b = 1;
+        long period = 0;
+
+        for (int i = 2; i < m*6;i++){
+            long next = (a+b)%m;
+            a = b;
+            b = next;
+            if (a == 0 && b == 1){
+                period = i - 1;
+                break;
+            }
+        }
+
+        n = n % period;
+        a = 0;
+        b = 1;
+        for (int i = 2; i <= n;i++){
+            long next = (a+b)%m;
+            a = b;
+            b = next;
+        }
+        return b;
     }
 
 
